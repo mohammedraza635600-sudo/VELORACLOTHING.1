@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VELORA — The Verdant Edit</title>
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0F2A1D">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VELORA">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -680,13 +680,13 @@ function renderGrid(){
   grid.querySelectorAll(".card").forEach(card => {
     card.addEventListener("click", (e) => {
       if(e.target.closest(".wish-btn")) return;
-      openModal(parseInt(card.dataset.id));
+      openModal(card.dataset.id);
     });
   });
   grid.querySelectorAll("[data-wish]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      toggleWishlist(parseInt(btn.dataset.wish));
+      toggleWishlist(btn.dataset.wish);
     });
   });
 }
@@ -731,7 +731,7 @@ function renderWishDrawer(){
     </div>
   `).join("");
   body.querySelectorAll("[data-wish-remove]").forEach(btn => {
-    btn.addEventListener("click", () => toggleWishlist(parseInt(btn.dataset.wishRemove)));
+    btn.addEventListener("click", () => toggleWishlist(btn.dataset.wishRemove));
   });
 }
 
@@ -796,9 +796,9 @@ function renderCartDrawer(){
     <button class="btn btn-primary" id="checkoutBtn">Checkout via WhatsApp</button>
   `;
 
-  body.querySelectorAll("[data-qty-plus]").forEach(b => b.addEventListener("click", () => updateCartQty(parseInt(b.dataset.qtyPlus), b.dataset.size, 1)));
-  body.querySelectorAll("[data-qty-minus]").forEach(b => b.addEventListener("click", () => updateCartQty(parseInt(b.dataset.qtyMinus), b.dataset.size, -1)));
-  body.querySelectorAll("[data-cart-remove]").forEach(b => b.addEventListener("click", () => removeFromCart(parseInt(b.dataset.cartRemove), b.dataset.size)));
+  body.querySelectorAll("[data-qty-plus]").forEach(b => b.addEventListener("click", () => updateCartQty(b.dataset.qtyPlus, b.dataset.size, 1)));
+  body.querySelectorAll("[data-qty-minus]").forEach(b => b.addEventListener("click", () => updateCartQty(b.dataset.qtyMinus, b.dataset.size, -1)));
+  body.querySelectorAll("[data-cart-remove]").forEach(b => b.addEventListener("click", () => removeFromCart(b.dataset.cartRemove, b.dataset.size)));
 
   const checkoutBtn = document.getElementById("checkoutBtn");
   if(checkoutBtn) checkoutBtn.addEventListener("click", checkout);
@@ -989,7 +989,7 @@ document.getElementById("closeCheckoutForm").addEventListener("click", () => {
 /* ---------- PWA: service worker + install prompt ---------- */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js").catch(err => console.log("SW registration failed", err));
+    navigator.serviceWorker.register("/service-worker.js").catch(err => console.log("SW registration failed", err));
   });
 }
 let deferredInstallPrompt = null;
